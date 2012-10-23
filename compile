@@ -1,0 +1,4 @@
+#!/bin/bash
+
+coffee -c -o js cs
+coffee -c -o spec/js spec/cs
