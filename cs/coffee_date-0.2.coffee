@@ -1,5 +1,6 @@
 window.CoffeeDate =
-  ISO_8601: /^\d{4}-[01]?\d-[0-3]?\d$/
+  ISO_8601:     /^\d{4}-[01]?\d-[0-3]?\d$/
+  SHORT_MONTHS: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
 # Returns true if date is today, false otherwise.
 Date.prototype.isToday = ->
@@ -11,6 +12,13 @@ Date.prototype.isToday = ->
 # Returns true if date is this calendar year, false otherwise.
 Date.prototype.isThisYear = ->
   @getFullYear() == (new Date).getFullYear()
+
+Date.prototype.toStr = (format) ->
+  switch format
+    when 'mon date'
+      "#{CoffeeDate.SHORT_MONTHS[@getMonth()]} #{@getDate()}"
+    when 'mon year'
+      "#{CoffeeDate.SHORT_MONTHS[@getMonth()]} #{@getFullYear()}"
 
 # Returns true if dateStr is in yyyy-mm-dd format.
 CoffeeDate.isISO_8601 = (dateStr) ->

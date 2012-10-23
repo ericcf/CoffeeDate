@@ -2,7 +2,8 @@
 (function() {
 
   window.CoffeeDate = {
-    ISO_8601: /^\d{4}-[01]?\d-[0-3]?\d$/
+    ISO_8601: /^\d{4}-[01]?\d-[0-3]?\d$/,
+    SHORT_MONTHS: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   };
 
   Date.prototype.isToday = function() {
@@ -13,6 +14,15 @@
 
   Date.prototype.isThisYear = function() {
     return this.getFullYear() === (new Date).getFullYear();
+  };
+
+  Date.prototype.toStr = function(format) {
+    switch (format) {
+      case 'mon date':
+        return "" + CoffeeDate.SHORT_MONTHS[this.getMonth()] + " " + (this.getDate());
+      case 'mon year':
+        return "" + CoffeeDate.SHORT_MONTHS[this.getMonth()] + " " + (this.getFullYear());
+    }
   };
 
   CoffeeDate.isISO_8601 = function(dateStr) {
